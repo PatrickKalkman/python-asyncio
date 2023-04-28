@@ -1,10 +1,12 @@
 import asyncio
 
+
 async def send_message(writer):
     while True:
         message = input("Enter message: ")
         writer.write(message.encode())
         await writer.drain()
+
 
 async def receive_message(reader):
     while True:
@@ -14,6 +16,7 @@ async def receive_message(reader):
             break
         print(data.decode())
 
+
 async def main():
     reader, writer = await asyncio.open_connection("localhost", 12345)
 
@@ -22,6 +25,7 @@ async def main():
     finally:
         writer.close()
         await writer.wait_closed()
+
 
 if __name__ == "__main__":
     try:

@@ -1,5 +1,6 @@
 import asyncio
 
+
 async def handle_client(reader, writer):
     addr = writer.get_extra_info("peername")
     print(f"New connection from {addr}")
@@ -14,6 +15,7 @@ async def handle_client(reader, writer):
         writer.write(f"Echo: {message.decode()}".encode())
         await writer.drain()
 
+
 async def main():
     server = await asyncio.start_server(handle_client, "localhost", 12345)
     addr = server.sockets[0].getsockname()
@@ -21,6 +23,7 @@ async def main():
 
     async with server:
         await server.serve_forever()
+
 
 if __name__ == "__main__":
     try:
